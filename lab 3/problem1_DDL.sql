@@ -1,0 +1,33 @@
+use company;
+
+CREATE TABLE EMPLOYEE (
+	ssn INT NOT NULL PRIMARY KEY,
+    fname VARCHAR(200) NOT NULL,
+    lname VARCHAR(200) NOT NULL,
+    bdate VARCHAR(200),
+    address VARCHAR(200),
+    gender VARCHAR(10),
+    salary FLOAT,
+    Dno INT
+);
+
+ALTER TABLE EMPLOYEE ADD CHECK(gender = 'male' OR gender = 'female');
+
+CREATE TABLE DEPARTMENT (
+	Dnumber INT NOT NULL PRIMARY KEY,
+    Dname VARCHAR(200) NOT NULL,
+    mgr_ssn INT,
+    mgr_start_date DATE,
+    FOREIGN KEY (mgr_ssn) REFERENCES EMPLOYEE(ssn)
+);
+
+ALTER TABLE EMPLOYEE ADD FOREIGN KEY (DNO) 
+REFERENCES DEPARTMENT(Dnumber);
+
+CREATE TABLE PROJECT (
+	Pnumber INT NOT NULL PRIMARY KEY,
+    Pname VARCHAR(200) NOT NULL,
+    Plocation VARCHAR(200) NOT NULL,
+    Dno INT,
+    FOREIGN KEY (Dno) REFERENCES DEPARTMENT(Dnumber)
+);
